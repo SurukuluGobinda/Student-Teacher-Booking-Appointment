@@ -20,7 +20,7 @@ View Appointments: Teachers can view all their scheduled appointments, including
 Manage Appointments: Teachers have the ability to approve or cancel appointments, ensuring they have control over their schedules.
 View Messages: Teachers can read messages from students, facilitating effective communication.
 
-## Admin Dashboard:
+## Admin Dashboard: ( admin2@gmail.come and admin22 )
 
 1. User Management: View and manage all users registered on the platform, including their roles and statuses.
 2. Teacher Management: Add and remove teachers, ensuring the database is up-to-date with current staff.
