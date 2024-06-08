@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>student teacher appointment-login</title>
+    <!-- font awesome cdn link  -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+    <!-- custom css file link  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/login.css">
+
+</head>
+
+<body>
+    <!-- Start header -->
+    <header class="header background ">
+        <nav class="navbar h-nav-resp">
+            <div class="logo v-class-resp">
+                <img src="images/Tejlearnhub.jpg" alt="logo">
+                <a href="index.html" class="lgname">Tej<span>learn</span>hub</a>
+            </div>
+            <ul class="nav-list v-class-resp">
+                <li><a href="index.html">Home</a></li>
+                
+                <li><a href="admin_login.html">Admin</a></li>
+            </ul>
+            <div class="search v-class-resp">
+                <input class="srch" type="search" name="" placeholder="Type">
+                <a href="#"><button class="bt">search</button></a>
+            </div>
+            <div class="bargar">
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+            </div>
+        </nav>
+    </header>
+    <!-- Ends header -->
+
+    <!-- Start Mainbox -->
+    <div class="main-box">
+
+        <!-- home section starts  -->
+
+        <div class="background">
+            <section class="home" id="home">
+                <div class="content">
+                    <p class="text-big">
+                        Tej Learn Hub
+                    </p>
+                    <p class="text-small">“Education is one thing no one can take away from you.” </p>
+                    <a href="index.html" class="btn"> Enquiry Now <span class="fas fa-chevron-right"></span> </a>
+                </div>
+    
+                <div class="box">
+                    <div class="login">
+                        <div class="form">
+                            <h2>Login Here</h2>
+                            <input type="text" name="email" placeholder="email" id="ad_email">
+                            <input type="password" name="" placeholder="Password" id="ad_password">
+                            <button class="btn" id="login_btn"><a href="#">Login</a></button>
+            
+                        </div>   
+                    </div>
+                </div>
+            </section>
+        </div>
+        <!-- home section ends -->
+
+
+        <!--contact section start  -->
+        <!-- footer -->
+        <footer>
+            <p>
+                Copyright &copy; 2024-2025 www.student teacher appointment.com | All rights reserved
+            </p>
+        </footer>
+        <!-- footer -->
+    </div>
+    <!-- End Mainbox -->
+    <!-- js for toggle -->
+    <script src="js/main.js"></script>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        
+        import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+          apiKey: "AIzaSyB7XbGO16_7AUJ4vdHmVtGhb0rI_fQkeLc",
+          authDomain: "student-teacher-appointm-61095.firebaseapp.com",
+          projectId: "student-teacher-appointm-61095",
+          storageBucket: "student-teacher-appointm-61095.appspot.com",
+          messagingSenderId: "322173452871",
+          appId: "1:322173452871:web:0952389ac2538978d02762"
+        };
+      
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+         // login User
+
+         function loginUser() {
+            const email = document.querySelector('#ad_email').value;
+            const password = document.querySelector('#ad_password').value;
+
+            if (!email || !password) {
+                alert("Plz enter email and password")
+                return;
+            }
+
+            signInWithEmailAndPassword(auth, email, password).then((userCredintial) => {
+                console.log("Login User");
+            })
+
+                .catch((error) => {
+                    console.log(error);
+                })
+
+
+        }
+
+        const login_btn = document.querySelector('#login_btn');
+
+        login_btn.addEventListener('click', loginUser);
+
+        //after login
+
+        onAuthStateChanged(auth,(user)=>{
+            
+            if(user){
+                window.location.assign("admin.html")
+            }else{
+                console.log("error");
+            }
+
+        })
+
+
+      </script>
+
+</body>
+
+</html>

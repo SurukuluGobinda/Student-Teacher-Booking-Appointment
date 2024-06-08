@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>student teacher appointment-login</title>
+    <!-- font awesome cdn link  -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+    <!-- custom css file link  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/login.css">
+
+</head>
+
+<body>
+    <!-- Start header -->
+    <header class="header background ">
+        <nav class="navbar h-nav-resp">
+            <div class="logo v-class-resp">
+                <img src="images/Tejlearnhub.jpg" alt="logo">
+                <a href="index.html" class="lgname">Tej<span>learn</span>hub</a>
+            </div>
+            <ul class="nav-list v-class-resp">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="teachers.html">Teachers login</a></li>
+                <li><a href="login.html">Student</a></li>
+            </ul>
+            <div class="search v-class-resp">
+                <input class="srch" type="search" name="" placeholder="Type">
+                <a href="#"><button class="bt">search</button></a>
+            </div>
+            <div class="bargar">
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+            </div>
+        </nav>
+    </header>
+    <!-- Ends header -->
+
+    <!-- Start Mainbox -->
+    <div class="main-box">
+
+        <!-- home section starts  -->
+
+        <div class="background">
+            <section class="home" id="home">
+                <div class="content">
+                    <p class="text-big">
+                        Tej Learn Hub
+                    </p>
+                    <p class="text-small"> " Register form for Student. " </p>
+                    <a href="index.html" class="btn"> Enquiry Now <span class="fas fa-chevron-right"></span> </a>
+                </div>
+
+                <div class="box">
+                    <div class="signup">
+                        <div class="form-sg">
+                            <h2>Sign Up Here</h2>
+                            <input type="text" name="name" placeholder="Full Name" id="name">
+                            <input type="text" name="phone_no" placeholder="Phone no." id="phone_no">
+                            <input type="email" name="email" placeholder="email" id="uemail">
+                            <input type="text" name="Gender" placeholder="Gender" id="gender">
+                            <input type="text" name="Address" placeholder="Address" id="Address">
+                            <input type="password" name="password" placeholder="Password" id="upassword">
+                            <input type="date" name="Date of birth" placeholder="DOB" id="DOB">
+                            <input type="text" name="Department" placeholder="Department" id="department">
+                            <button type="submit" class="btn-sg" id="signup_btn"><a href="#">SignUp</a></button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+        <!-- home section ends -->
+
+
+        <!--contact section start  -->
+        <!-- footer -->
+        <footer>
+            <p>
+                Copyright &copy; 2024-2025 www.student teacher appointment.com | All rights reserved
+            </p>
+        </footer>
+        <!-- footer -->
+    </div>
+    <!-- End Mainbox -->
+    <!-- js for toggle -->
+    <script src="js/main.js"></script>
+
+    <script type="module">
+       
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { getDatabase, set, ref } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-database.js";
+        import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyB7XbGO16_7AUJ4vdHmVtGhb0rI_fQkeLc",
+            authDomain: "student-teacher-appointm-61095.firebaseapp.com",
+            projectId: "student-teacher-appointm-61095",
+            storageBucket: "student-teacher-appointm-61095.appspot.com",
+            messagingSenderId: "322173452871",
+            appId: "1:322173452871:web:bf9dab3c20221bd3d02762"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const database = getDatabase(app);
+        const auth = getAuth();
+
+        const signUp = document.querySelector('#signup_btn');
+
+        signUp.addEventListener('click', (e) => {
+            
+            var u_email = document.getElementById('uemail').value;
+            var u_password = document.getElementById('upassword').value;
+            var name = document.getElementById('name').value;
+            var Phone_no = document.getElementById('phone_no').value;
+            var Gender = document.getElementById('gender').value;
+            var Address = document.getElementById('Address').value;
+            var Department = document.getElementById('department').value;
+            var DOB = document.getElementById('DOB').value;
+
+
+
+            createUserWithEmailAndPassword(auth, u_email, u_password)
+                .then((userCredential) => {
+                    // Signed up 
+                    const user = userCredential.user;
+
+                    set(ref(database, 'Students/' + user.uid),{
+                        Name: name,
+                        Phone_no: Phone_no,
+                        email: u_email,
+                        Gender: Gender,
+                        Address: Address,
+                        Department: Department,
+                        DOB: DOB
+                    })
+
+                    alert('User created')
+                    // ...
+                })
+                .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+
+                    alert(errorMessage);
+                    // ..
+                });
+        })
+
+
+
+
+
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student</title>
+    <!-- boxicon -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+    <link rel="stylesheet" href="css/student.css">
+</head>
+
+<body>
+
+    <!-- Sidebar -->
+    <section class="sidebar" id="sidebar">
+        <a href="#" class="brand">
+            <i class='bx bxs-user-rectangle'></i>
+            <span class="text">Student</span>
+        </a>
+        <ul class="side-menu top">
+            <li class="active">
+                <a href="">
+                    <i class='bx bxs-dashboard'></i>
+                    <span class="text">Dashboard</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class='bx bxs-user'></i>
+                    <span class="text">All Classes join</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class='bx bxs-group'></i>
+                    <span class="text">Teachers</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class='bx bx-history' ></i>
+                    <span class="text">History</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class='bx bx-question-mark'></i>
+                    <span class="text">Help</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class='bx bxs-flag'></i>
+                    <span class="text">Reports</span>
+                </a>
+            </li>
+        </ul>
+        <ul class="side-menu">
+            <li>
+                <a href="#">
+                    <i class='bx bxs-cog'></i>
+                    <span class="text">Settings</span>
+                </a>
+            </li>
+            <li>
+                <a href="" class="logout"  id="logout_btn">
+                    <i class='bx bxs-log-out-circle'></i>
+                    <span class="text">Logout</span>
+                </a>
+            </li>
+        </ul>
+    </section>
+    <!-- Sidebar -->
+
+    <!-- Content -->
+    <section class="content" id="content">
+        <!-- Navbar -->
+        <nav class="navbar">
+            <i class='bx bx-menu' id="menu"></i>
+            <a href="#" class="nav-link">Categories</a>
+            <form action="#">
+                <div class="form-input">
+                    <input type="search" placeholder="Search" id="searchInput">
+                    <button type="submit" class="search-btn" id="searchButton"><i class='bx bx-search'></i></button>
+                </div>
+            </form>
+            <a href="#" class="notification">
+                <i class='bx bxs-bell'></i>
+                <span class="num">7</span>
+            </a>
+
+            <a href="#" class="profile">
+                <img src="images/user.png" alt="user photo" id="profile">
+            </a>
+        </nav>
+        <!-- Navbar -->
+
+        <!-- Main -->
+        <main>
+            <div class="head-title">
+                <div class="left">
+                    <h1>Dashboard</h1>
+                    <ul class="breadcrumb">
+                        <li>
+                            <a href="#">Dashboard</a>
+                        </li>
+                        <li><i class='bx bx-chevron-right'></i></li>
+                        <li>
+                            <a href="#" class="active">Home</a>
+                        </li>
+                    </ul>
+                </div>
+                <a href="#" class="btn-download">
+                    <i class='bx bxs-cloud-download'></i>
+                    <span class="text">Download pdf</span>
+                </a>
+            </div>
+            <ul class="box-info">
+                <li>
+                    <i class='bx bxs-user-circle'></i>
+                    <span class="text">
+                        <h3>45</h3>
+                        <p>Total Class</p>
+                    </span>
+                </li>
+                <li>
+                    <i class='bx bxs-notepad'></i>
+                    <span class="text">
+                        <h3>2</h3>
+                        <p>New Booking</p>
+                    </span>
+                </li>
+                <li>
+                    <i class='bx bx-money'></i>
+                    <span class="text">
+                        <h3>14000</h3>
+                        <p>Total Payment</p>
+                    </span>
+                </li>
+            </ul>
+
+            <div class="container">
+                <div class="booking">
+                    <h2>Book Appointment</h2>
+                    <form id="appointmentForm">
+                        <div class="sect">
+                            <select id="teacherSelect"></select>
+                            <input type="datetime-local" id="appointmentTime" required>
+                        </div>
+                        <button class="btn-su" type="submit">Book Appointment</button>
+                    </form>
+                </div>
+                <div class="Message">
+                    <h2>Send Message</h2>
+                    <form id="messageForm">
+                        <div class="sect">
+                            <select id="teacherMessageSelect"></select>
+                            <textarea id="messageContent" placeholder="Enter your message" required></textarea>
+                        </div>
+                        <button class="btn-su" type="submit">Send Message</button>
+                    </form>
+                </div>
+            </div>
+
+        </main>
+
+        <!-- Main -->
+
+    </section>
+    <!-- Content -->
+
+    <script  type="module">
+        const allSideMenu = document.querySelectorAll('.sidebar .side-menu.top li a');
+
+        allSideMenu.forEach(item => {
+            const li = item.parentElement;
+
+            item.addEventListener('click', function () {
+                allSideMenu.forEach(i => {
+                    i.parentElement.classList.remove('active');
+                })
+                li.classList.add('active');
+            })
+        });
+
+        // Toggle Sidebar
+
+        const menubar = document.querySelector('#menu');
+        const sidebar = document.getElementById('sidebar');
+
+
+        menubar.addEventListener('click', function () {
+            sidebar.classList.toggle('hide');
+        })
+
+        if (window.outerWidth < 730) {
+            sidebar.classList.add('hide');
+        }
+
+        const searchButton = document.querySelector('.content .navbar form .form-input button');
+        const searchButtonIcon = document.querySelector('.content .navbar form .form-input button .bx');
+        const searchForm = document.querySelector('.content .navbar form');
+
+        searchButton.addEventListener('click', function (e) {
+
+            if (window.outerWidth < 500) {
+                e.preventDefault();
+                searchForm.classList.toggle('show');
+                if (searchForm.classList.contains('show')) {
+                    searchButtonIcon.classList.replace('bx-search', 'bx-x');
+                } else {
+                    searchButtonIcon.classList.replace('bx-x', 'bx-search');
+                }
+            }
+
+        })
+
+        window.addEventListener('resize', function () {
+            if (this.outerWidth > 500) {
+                searchButtonIcon.classList.replace('bx-x', 'bx-search');
+                searchForm.classList.remove('show');
+            }
+        })
+
+
+
+        //firebase
+
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyB7XbGO16_7AUJ4vdHmVtGhb0rI_fQkeLc",
+            authDomain: "student-teacher-appointm-61095.firebaseapp.com",
+            projectId: "student-teacher-appointm-61095",
+            storageBucket: "student-teacher-appointm-61095.appspot.com",
+            messagingSenderId: "322173452871",
+            appId: "1:322173452871:web:bf9dab3c20221bd3d02762"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+
+        // logout function
+
+
+        const logout = document.querySelector('#logout_btn');
+		logout.addEventListener('click', function logOut() {
+			signOut(auth).then(() => {
+				window.location.assign("index.html")
+			})
+		})
+
+
+
+
+
+    </script>
+
+    <!-- <script type="module">
+        // scripts/student.js
+
+        auth.onAuthStateChanged(user => {
+            if (user) {
+                document.getElementById('studentEmail').textContent = user.email;
+            } else {
+                window.location.href = 'login.html';
+            }
+        });
+
+        document.getElementById('logout').addEventListener('click', () => {
+            auth.signOut().then(() => {
+                window.location.href = 'login.html';
+            });
+        });
+
+        document.getElementById('searchButton').addEventListener('click', () => {
+            const searchInput = document.getElementById('searchInput').value.toLowerCase();
+            const teacherList = document.getElementById('teacherList');
+            teacherList.innerHTML = '';
+
+            db.collection('teachers').get().then(querySnapshot => {
+                querySnapshot.forEach(doc => {
+                    const teacher = doc.data();
+                    if (teacher.name.toLowerCase().includes(searchInput) || teacher.subject.toLowerCase().includes(searchInput)) {
+                        const listItem = document.createElement('li');
+                        listItem.textContent = `${teacher.name} - ${teacher.subject}`;
+                        teacherList.appendChild(listItem);
+                    }
+                });
+            }).catch(error => {
+                console.error('Error fetching teachers:', error);
+            });
+        });
+
+        document.getElementById('appointmentForm').addEventListener('submit', e => {
+            e.preventDefault();
+            const teacherSelect = document.getElementById('teacherSelect').value;
+            const appointmentTime = document.getElementById('appointmentTime').value;
+
+            db.collection('appointments').add({
+                teacher: teacherSelect,
+                student: auth.currentUser.email,
+                time: appointmentTime,
+                status: 'pending'
+            }).then(() => {
+                alert('Appointment booked successfully');
+            }).catch(error => {
+                console.error('Error booking appointment:', error);
+            });
+        });
+
+        document.getElementById('messageForm').addEventListener('submit', e => {
+            e.preventDefault();
+            const teacherSelect = document.getElementById('teacherMessageSelect').value;
+            const messageContent = document.getElementById('messageContent').value;
+
+            db.collection('messages').add({
+                teacher: teacherSelect,
+                student: auth.currentUser.email,
+                content: messageContent,
+                timestamp: firebase.firestore.FieldValue.serverTimestamp()
+            }).then(() => {
+                alert('Message sent successfully');
+            }).catch(error => {
+                console.error('Error sending message:', error);
+            });
+        });
+
+        function populateTeacherSelects() {
+            const teacherSelect = document.getElementById('teacherSelect');
+            const teacherMessageSelect = document.getElementById('teacherMessageSelect');
+            teacherSelect.innerHTML = '';
+            teacherMessageSelect.innerHTML = '';
+
+            db.collection('teachers').get().then(querySnapshot => {
+                querySnapshot.forEach(doc => {
+                    const teacher = doc.data();
+                    const option = document.createElement('option');
+                    option.value = teacher.name;
+                    option.textContent = teacher.name;
+                    teacherSelect.appendChild(option);
+
+                    const messageOption = document.createElement('option');
+                    messageOption.value = teacher.name;
+                    messageOption.textContent = teacher.name;
+                    teacherMessageSelect.appendChild(messageOption);
+                });
+            }).catch(error => {
+                console.error('Error fetching teachers:', error);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', populateTeacherSelects);
+
+    </script> -->
+</body>
+
+</html>

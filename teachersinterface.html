@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher</title>
+    <!-- boxicon -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+    <link rel="stylesheet" href="css/student.css">
+</head>
+
+<body>
+
+    <!-- Sidebar -->
+    <section class="sidebar" id="sidebar">
+        <a href="#" class="brand">
+            <i class='bx bxs-user-rectangle'></i>
+            <span class="text">teacher</span>
+        </a>
+        <ul class="side-menu top">
+            <li class="active">
+                <a href="">
+                    <i class='bx bxs-dashboard'></i>
+                    <span class="text">Dashboard</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class='bx bxs-user'></i>
+                    <span class="text">Students</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class='bx bxs-message' ></i>
+                    <span class="text">All Messages</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class='bx bx-money'></i>
+                    <span class="text">Income</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class='bx bx-question-mark'></i>
+                    <span class="text">Help</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class='bx bxs-flag'></i>
+                    <span class="text">Reports</span>
+                </a>
+            </li>
+        </ul>
+        <ul class="side-menu">
+            <li>
+                <a href="#">
+                    <i class='bx bxs-cog'></i>
+                    <span class="text">Settings</span>
+                </a>
+            </li>
+            <li>
+                <a href="" class="logout" id="logout_btn">
+                    <i class='bx bxs-log-out-circle'></i>
+                    <span class="text">Logout</span>
+                </a>
+            </li>
+        </ul>
+    </section>
+    <!-- Sidebar -->
+
+    <!-- Content -->
+    <section class="content" id="content">
+        <!-- Navbar -->
+        <nav class="navbar">
+            <i class='bx bx-menu' id="menu"></i>
+            <a href="#" class="nav-link">Categories</a>
+            <form action="#">
+                <div class="form-input">
+                    <input type="search" placeholder="Search" id="searchInput">
+                    <button type="submit" class="search-btn" id="searchButton"><i class='bx bx-search'></i></button>
+                </div>
+            </form>
+            <a href="#" class="notification">
+                <i class='bx bxs-bell'></i>
+                <span class="num">7</span>
+            </a>
+
+            <a href="#" class="profile">
+                <img src="images/user.png" alt="user photo" id="profile">
+            </a>
+        </nav>
+        <!-- Navbar -->
+
+        <!-- Main -->
+        <main>
+            <div class="head-title">
+                <div class="left">
+                    <h1>Dashboard</h1>
+                    <ul class="breadcrumb">
+                        <li>
+                            <a href="#">Dashboard</a>
+                        </li>
+                        <li><i class='bx bx-chevron-right'></i></li>
+                        <li>
+                            <a href="#" class="active">Home</a>
+                        </li>
+                    </ul>
+                </div>
+                <a href="#" class="btn-download">
+                    <i class='bx bxs-cloud-download'></i>
+                    <span class="text">Download pdf</span>
+                </a>
+            </div>
+            <ul class="box-info">
+                <li>
+                    <i class='bx bxs-user-circle'></i>
+                    <span class="text">
+                        <h3>45</h3>
+                        <p>Total Class</p>
+                    </span>
+                </li>
+                <li>
+                    <i class='bx bxs-notepad'></i>
+                    <span class="text">
+                        <h3>2</h3>
+                        <p>Classes left today</p>
+                    </span>
+                </li>
+                <li>
+                    <i class='bx bx-money'></i>
+                    <span class="text">
+                        <h3>14000</h3>
+                        <p>Total Income</p>
+                    </span>
+                </li>
+            </ul>
+
+            <div class="container">
+                <div class="booking">
+                    <h2>View Appointment</h2>
+                    <ul id="appointmentsList"></ul>
+                </div>
+                <div class="Message">
+                    <h2>View Messages</h2>
+                    <ul id="messagesList"></ul>
+                </div>
+            </div>
+
+        </main>
+
+        <!-- Main -->
+
+    </section>
+    <!-- Content -->
+
+    <script type="module">
+        const allSideMenu = document.querySelectorAll('.sidebar .side-menu.top li a');
+
+        allSideMenu.forEach(item => {
+            const li = item.parentElement;
+
+            item.addEventListener('click', function () {
+                allSideMenu.forEach(i => {
+                    i.parentElement.classList.remove('active');
+                })
+                li.classList.add('active');
+            })
+        });
+
+        // Toggle Sidebar
+
+        const menubar = document.querySelector('#menu');
+        const sidebar = document.getElementById('sidebar');
+
+
+        menubar.addEventListener('click', function () {
+            sidebar.classList.toggle('hide');
+        })
+
+        if (window.outerWidth < 730) {
+            sidebar.classList.add('hide');
+        }
+
+        const searchButton = document.querySelector('.content .navbar form .form-input button');
+        const searchButtonIcon = document.querySelector('.content .navbar form .form-input button .bx');
+        const searchForm = document.querySelector('.content .navbar form');
+
+        searchButton.addEventListener('click', function (e) {
+
+            if (window.outerWidth < 500) {
+                e.preventDefault();
+                searchForm.classList.toggle('show');
+                if (searchForm.classList.contains('show')) {
+                    searchButtonIcon.classList.replace('bx-search', 'bx-x');
+                } else {
+                    searchButtonIcon.classList.replace('bx-x', 'bx-search');
+                }
+            }
+
+        })
+
+        window.addEventListener('resize', function () {
+            if (this.outerWidth > 500) {
+                searchButtonIcon.classList.replace('bx-x', 'bx-search');
+                searchForm.classList.remove('show');
+            }
+        })
+
+
+
+
+        //firebase
+
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyB7XbGO16_7AUJ4vdHmVtGhb0rI_fQkeLc",
+            authDomain: "student-teacher-appointm-61095.firebaseapp.com",
+            projectId: "student-teacher-appointm-61095",
+            storageBucket: "student-teacher-appointm-61095.appspot.com",
+            messagingSenderId: "322173452871",
+            appId: "1:322173452871:web:bf9dab3c20221bd3d02762"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+
+        // logout function
+
+
+        const logout = document.querySelector('#logout_btn');
+		logout.addEventListener('click', function logOut() {
+			signOut(auth).then(() => {
+				window.location.assign("index.html")
+			})
+		})
+    </script>
+
+    <!-- <script type="module">
+        // scripts/teacher.js
+
+        auth.onAuthStateChanged(user => {
+            if (user) {
+                document.getElementById('teacherEmail').textContent = user.email;
+                loadAppointments(user.email);
+                loadMessages(user.email);
+            } else {
+                window.location.href = 'login.html';
+            }
+        });
+
+        document.getElementById('logout').addEventListener('click', () => {
+            auth.signOut().then(() => {
+                window.location.href = 'login.html';
+            });
+        });
+
+        function loadAppointments(teacherEmail) {
+            const appointmentsList = document.getElementById('appointmentsList');
+            appointmentsList.innerHTML = '';
+
+            db.collection('appointments').where('teacher', '==', teacherEmail).get().then(querySnapshot => {
+                querySnapshot.forEach(doc => {
+                    const appointment = doc.data();
+                    const listItem = document.createElement('li');
+                    listItem.textContent = `Student: ${appointment.student}, Time: ${appointment.time}, Status: ${appointment.status}`;
+
+                    if (appointment.status === 'pending') {
+                        const approveButton = document.createElement('button');
+                        approveButton.textContent = 'Approve';
+                        approveButton.addEventListener('click', () => updateAppointmentStatus(doc.id, 'approved'));
+                        listItem.appendChild(approveButton);
+
+                        const cancelButton = document.createElement('button');
+                        cancelButton.textContent = 'Cancel';
+                        cancelButton.addEventListener('click', () => updateAppointmentStatus(doc.id, 'cancelled'));
+                        listItem.appendChild(cancelButton);
+                    }
+
+                    appointmentsList.appendChild(listItem);
+                });
+            }).catch(error => {
+                console.error('Error fetching appointments:', error);
+            });
+        }
+
+        function loadMessages(teacherEmail) {
+            const messagesList = document.getElementById('messagesList');
+            messagesList.innerHTML = '';
+
+            db.collection('messages').where('teacher', '==', teacherEmail).get().then(querySnapshot => {
+                querySnapshot.forEach(doc => {
+                    const message = doc.data();
+                    const listItem = document.createElement('li');
+                    listItem.textContent = `Student: ${message.student}, Message: ${message.content}, Sent: ${message.timestamp.toDate()}`;
+                    messagesList.appendChild(listItem);
+                });
+            }).catch(error => {
+                console.error('Error fetching messages:', error);
+            });
+        }
+
+        function updateAppointmentStatus(appointmentId, status) {
+            db.collection('appointments').doc(appointmentId).update({
+                status: status
+            }).then(() => {
+                alert(`Appointment ${status}`);
+                auth.onAuthStateChanged(user => {
+                    if (user) {
+                        loadAppointments(user.email);
+                    }
+                });
+            }).catch(error => {
+                console.error('Error updating appointment status:', error);
+            });
+        }
+
+    </script> -->
+</body>
+
+</html>
